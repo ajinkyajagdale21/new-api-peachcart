@@ -11,7 +11,7 @@ const initialConnection = async () => {
         }
     }
     catch (error) {
-        console.log("connection failed ", error)
+        console.log("connection failed! ", error)
     }
 }
 
