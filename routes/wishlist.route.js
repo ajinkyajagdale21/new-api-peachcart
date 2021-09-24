@@ -2,7 +2,7 @@ const express= require('express');
 const { extend } = require('lodash');
 const {Wishlist} = require('../models/wishlist.model');
 const router = express.Router();
-
+const {verifyToken} = require('../middleware/auth.verify')
 
 router.route('/')
     .get(async(req,res)=>{
@@ -14,6 +14,8 @@ router.route('/')
             res.status(404).json({success:false,message: "unable to fetch Wishlist!"})
         }
     })
+
+    router.use(verifyToken);
 
 router.param("userId",async(req,res,next,userId)=>{
     try{

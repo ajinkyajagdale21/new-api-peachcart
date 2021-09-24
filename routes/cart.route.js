@@ -3,6 +3,7 @@ const express= require('express');
 const { Cart } = require("../models/cart.model");
 const router = Router()
 const {extend} = require('lodash')
+const {verifyToken} = require('../middleware/auth.verify')
 
 router.route('/')
     .get(async(req,res)=>{
@@ -14,6 +15,7 @@ router.route('/')
             res.status(404).json({success:false,message:"unable to fetch cart"})
         }
 })
+router.use(verifyToken);
 
 router.param("userId",async(req,res,next,userId)=>{
     try{
